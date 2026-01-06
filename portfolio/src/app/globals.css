@@ -1,0 +1,281 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@import "tw-animate-css";
+
+/* TipTap Editor Styles */
+.tiptap {
+  :first-child {
+    margin-top: 0;
+  }
+
+  /* List styles */
+  ul,
+  ol {
+    padding: 0 1rem;
+    margin: 1.25rem 1rem 1.25rem 0.4rem;
+    list-style-type: disc;
+    
+    li p {
+      margin-top: 0.25rem;
+      margin-bottom: 0.25rem;
+    }
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
+
+  /* Placeholder (at the top) */
+  p.is-editor-empty:first-child::before {
+    color: var(--muted-foreground);
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+  }
+
+  /* Selection */
+  .selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+}
+
+/* Image Resizing & Alignment */
+.prose img, .tiptap img, .rich-text-content img {
+  border-radius: var(--radius);
+  transition: all 0.3s ease;
+  max-width: 90%; /* Slightly smaller by default as requested */
+  height: auto;
+  cursor: zoom-in; /* Indicate lightbox capability */
+  margin-left: auto;
+  margin-right: auto;
+
+  &.ProseMirror-selectednode {
+    outline: 3px solid var(--primary);
+    box-shadow: 0 0 20px rgba(var(--primary), 0.3);
+  }
+}
+
+/* Specific Alignment Support from TipTap Attributes */
+img[data-text-align="left"], 
+.prose img[data-text-align="left"],
+.rich-text-content img[data-text-align="left"] {
+  float: left !important;
+  margin-right: 2rem !important;
+  margin-bottom: 1.5rem !important;
+  display: inline !important;
+}
+
+img[data-text-align="right"],
+.prose img[data-text-align="right"],
+.rich-text-content img[data-text-align="right"] {
+  float: right !important;
+  margin-left: 2rem !important;
+  margin-bottom: 1.5rem !important;
+  display: inline !important;
+}
+
+img[data-text-align="center"],
+.prose img[data-text-align="center"],
+.rich-text-content img[data-text-align="center"] {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  float: none !important;
+}
+
+/* Ensure manual width/height are respected and not overwritten by prose */
+.prose :where(img):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  width: auto; /* Allow inline style/attribute to take precedence */
+  height: auto;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* If TipTap sets a width attribute but no style, this helps */
+.prose img[width], .rich-text-content img[width] {
+  width: auto; /* Browser will use the 'width' attribute natively if style is auto */
+}
+
+/* Clearfix for floats in prose */
+.prose::after, .tiptap::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Image Resize Extension UI */
+.image-resizer {
+  display: inline-block;
+  position: relative;
+  line-height: 0;
+  max-width: 100%;
+
+  &__handler {
+    position: absolute;
+    right: -4px;
+    bottom: -4px;
+    width: 14px;
+    height: 14px;
+    background-color: var(--primary);
+    border: 2px solid white;
+    border-radius: 50%;
+    cursor: nwse-resize;
+    z-index: 50;
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      transform: scale(1.3);
+    }
+  }
+
+  &:hover &__handler,
+  &.ProseMirror-selectednode &__handler {
+    opacity: 1;
+  }
+}
+
+/* Ensure images don't overflow when scaled up */
+.prose img, .tiptap img {
+  max-width: 100%;
+}
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+}
+
+:root {
+  /* Royal Blue Light Theme */
+  --radius: 0.625rem;
+  --background: oklch(1 0 0); /* White */
+  --foreground: oklch(0.2 0.05 260); /* Very Dark Blue */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0.05 260);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0.05 260);
+  --primary: oklch(0.4 0.15 260); /* Royal Blue */
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.96 0.01 260); /* Light Grey/Blue Tint */
+  --secondary-foreground: oklch(0.2 0.05 260);
+  --muted: oklch(0.96 0.01 260);
+  --muted-foreground: oklch(0.5 0.05 260);
+  --accent: oklch(0.96 0.01 260);
+  --accent-foreground: oklch(0.2 0.05 260);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.9 0.02 260);
+  --input: oklch(0.9 0.02 260);
+  --ring: oklch(0.4 0.15 260);
+  --chart-1: oklch(0.4 0.15 260);
+  --chart-2: oklch(0.5 0.15 260);
+  --chart-3: oklch(0.6 0.15 260);
+  --chart-4: oklch(0.7 0.15 260);
+  --chart-5: oklch(0.8 0.15 260);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.2 0.05 260);
+  --sidebar-primary: oklch(0.4 0.15 260);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.96 0.01 260);
+  --sidebar-accent-foreground: oklch(0.2 0.05 260);
+  --sidebar-border: oklch(0.9 0.02 260);
+  --sidebar-ring: oklch(0.4 0.15 260);
+}
+
+.dark {
+  /* Deep Black & Yellow Dark Theme */
+  --background: oklch(0 0 0); /* Deep Black */
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.14 0 0); /* Dark Grey */
+  --card-foreground: oklch(0.98 0 0);
+  --popover: oklch(0.14 0 0);
+  --popover-foreground: oklch(0.98 0 0);
+  --primary: oklch(0.85 0.17 90); /* Yellow Gold */
+  --primary-foreground: oklch(0 0 0);
+  --secondary: oklch(0.2 0 0);
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.2 0 0);
+  --muted-foreground: oklch(0.7 0 0);
+  --accent: oklch(0.2 0 0);
+  --accent-foreground: oklch(0.85 0.17 90);
+  --destructive: oklch(0.6 0.2 20);
+  --border: oklch(0.2 0 0);
+  --input: oklch(0.2 0 0);
+  --ring: oklch(0.85 0.17 90);
+  --chart-1: oklch(0.85 0.17 90);
+  --chart-2: oklch(0.75 0.17 90);
+  --chart-3: oklch(0.65 0.17 90);
+  --chart-4: oklch(0.55 0.17 90);
+  --chart-5: oklch(0.45 0.17 90);
+  --sidebar: oklch(0.14 0 0);
+  --sidebar-foreground: oklch(0.98 0 0);
+  --sidebar-primary: oklch(0.85 0.17 90);
+  --sidebar-primary-foreground: oklch(0 0 0);
+  --sidebar-accent: oklch(0.2 0 0);
+  --sidebar-accent-foreground: oklch(0.85 0.17 90);
+  --sidebar-border: oklch(0.2 0 0);
+  --sidebar-ring: oklch(0.85 0.17 90);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .animate-gradient {
+    animation: gradient 3s ease infinite;
+  }
+
+  @keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+}
