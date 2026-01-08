@@ -1,5 +1,5 @@
-import dbConnect from './src/lib/db';
-import Blog from './src/models/Blog';
+import dbConnect from '../src/lib/db';
+import Blog from '../src/models/Blog';
 import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
 import path from 'path';

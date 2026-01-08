@@ -58,11 +58,11 @@ export function ProjectForm({ initialData, onSubmit, isLoading, onCancel }: Proj
         challenges: initialData.challenges || [],
         security: initialData.security || [],
         outcome: initialData.outcome || { whatWorks: [], learnings: [], improvements: [] },
-        outcome: initialData.outcome || { whatWorks: [], learnings: [], improvements: [] },
+
         screenshotsList: initialData.screenshots ? Object.entries(initialData.screenshots).map(([key, url]) => ({ key, url })) : [],
     } : {
       title: '',
-      title: '',
+
       slug: '',
       subtitle: '',
       category: 'Full-Stack Project',

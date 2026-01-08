@@ -112,7 +112,7 @@ export function Hero({ initialProfile }: HeroProps) {
           className="flex-1 relative flex items-end justify-center self-end md:translate-x-12"
         >
           {/* Main Hero Image pinned to bottom - Increased size */}
-          <div className="relative w-[350px] h-[350px] md:w-[700px] md:h-[700px] mx-auto flex items-end justify-center">
+          <div className="relative w-full max-w-[225px] h-[280px] translate-y-16 sm:max-w-[350px] sm:h-[500px] md:w-[700px] md:h-[700px] md:max-w-none md:translate-y-0 mx-auto flex items-end justify-center">
              <div className="w-full h-full relative flex items-end justify-center">
                 {profile?.heroImageUrl ? (
                     <img 

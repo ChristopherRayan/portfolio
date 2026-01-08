@@ -41,10 +41,17 @@ export function Navigation() {
           : 'bg-transparent py-6'
       )}
     >
-      <div className="container mx-auto px-4 flex items-center justify-between">
-        <Link href="/" className="text-2xl font-bold tracking-tighter">
-          C.R.K<span className="text-primary">.</span>
-        </Link>
+      <div className="container mx-auto px-4 flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-0">
+        <div className="flex items-center justify-between w-full md:w-auto">
+          <Link href="/" className="text-2xl font-bold tracking-tighter">
+            C.R.K<span className="text-primary">.</span>
+          </Link>
+          
+          {/* Mobile Theme Toggle (Top Right) */}
+          <div className="md:hidden">
+            <ThemeToggle />
+          </div>
+        </div>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
@@ -69,12 +76,12 @@ export function Navigation() {
           <ThemeToggle />
         </nav>
 
-        {/* Mobile Menu Toggle */}
-        <div className="flex items-center gap-4 md:hidden">
-          <ThemeToggle />
+        {/* Mobile Menu Toggle (Left, under Logo) */}
+        <div className="flex items-center gap-4 md:hidden self-start">
           <Button
             variant="ghost"
             size="icon"
+            className="-ml-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X /> : <Menu />}

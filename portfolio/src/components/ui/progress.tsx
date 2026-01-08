@@ -14,7 +14,7 @@ const Progress = React.forwardRef<
       "relative h-2 w-full overflow-hidden rounded-full bg-secondary/20",
       className
     )}
-    {...props}
+    {...props}>
     {/* eslint-disable-next-line */}
     <div
       className="h-full w-full flex-1 bg-primary transition-all"
