@@ -34,15 +34,15 @@ export function ProfileForm({ initialData, onSubmit, isLoading }: ProfileFormPro
   const form = useForm<z.infer<typeof profileSchema>>({
     resolver: zodResolver(profileSchema),
     defaultValues: (initialData ? {
-        name: initialData.name,
-        title: initialData.title,
-        bio: initialData.bio,
+        name: initialData.name || '',
+        title: initialData.title || '',
+        bio: initialData.bio || '',
         professionalSummary: (initialData as any).professionalSummary || '',
-        email: initialData.email,
-        phone: initialData.phone,
-        location: initialData.location,
-        profileImageUrl: initialData.profileImageUrl,
-        cvUrl: initialData.cvUrl,
+        email: initialData.email || '',
+        phone: initialData.phone || '',
+        location: initialData.location || '',
+        profileImageUrl: initialData.profileImageUrl || '',
+        cvUrl: initialData.cvUrl || '',
         socialLinks: {
             github: initialData.socialLinks?.github || '',
             linkedin: initialData.socialLinks?.linkedin || '',

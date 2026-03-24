@@ -89,21 +89,27 @@ export function Navigation() {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation - compact dropdown */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 right-0 bg-background border-b md:hidden"
+            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.95 }}
+            transition={{ duration: 0.15 }}
+            className="absolute top-full left-4 mt-1 bg-background/95 backdrop-blur-md border border-border/60 rounded-xl shadow-xl md:hidden w-auto min-w-[140px]"
           >
-            <nav className="flex flex-col p-4 gap-4">
+            <nav className="flex flex-col p-2 gap-0.5">
               {navItems.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-sm font-medium hover:text-primary py-2 block"
+                  className={cn(
+                    'text-sm font-medium px-4 py-2.5 rounded-lg transition-colors hover:text-primary hover:bg-muted/60 block whitespace-nowrap',
+                    (pathname === item.href || (pathname.startsWith(item.href) && item.href !== '/'))
+                      ? 'text-primary bg-primary/10'
+                      : 'text-muted-foreground'
+                  )}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.name}
