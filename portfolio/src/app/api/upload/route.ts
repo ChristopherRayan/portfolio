@@ -40,6 +40,13 @@ export async function POST(req: NextRequest) {
         });
         return NextResponse.json(result);
     } else {
+        if (process.env.NODE_ENV === 'production') {
+            return NextResponse.json(
+              { error: 'Cloudinary is required for uploads in production' },
+              { status: 500 }
+            );
+        }
+
         // Fallback: Local Storage (for development)
         const fs = require('fs');
         const path = require('path');
