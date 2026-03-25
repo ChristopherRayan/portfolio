@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const dns = require('dns');
+
+dns.setServers(['1.1.1.1', '8.8.8.8']);
 
 const SOURCE_URI = process.env.SOURCE_MONGODB_URI || 'mongodb://localhost:27017/portfolio_db';
 const TARGET_URI = process.env.TARGET_MONGODB_URI;
