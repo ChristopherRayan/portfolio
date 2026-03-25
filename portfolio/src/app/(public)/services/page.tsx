@@ -9,6 +9,8 @@ export const metadata = {
   description: 'Professional services and solutions I offer.',
 };
 
+export const dynamic = 'force-dynamic';
+
 export default async function ServicesPage() {
   await dbConnect();
   

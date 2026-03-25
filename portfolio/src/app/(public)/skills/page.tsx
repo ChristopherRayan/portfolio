@@ -7,6 +7,8 @@ export const metadata = {
   description: 'My technical expertise and toolset.',
 };
 
+export const dynamic = 'force-dynamic';
+
 export default async function SkillsPage() {
   await dbConnect();
   

@@ -8,6 +8,8 @@ export const metadata = {
   description: 'Exploring the intersection of code, security, and digital craft.',
 };
 
+export const dynamic = 'force-dynamic';
+
 export default async function BlogListingPage() {
   await dbConnect();
   

@@ -7,6 +7,8 @@ export const metadata = {
   description: 'Showcase of my recent work and case studies.',
 };
 
+export const dynamic = 'force-dynamic';
+
 export default async function ProjectsPage() {
   await dbConnect();
   

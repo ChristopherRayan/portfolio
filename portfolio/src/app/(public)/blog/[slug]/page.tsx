@@ -4,6 +4,8 @@ import Blog, { IBlog } from '@/models/Blog';
 import BlogDetailsClient from '@/components/public/BlogDetailsClient';
 import { notFound } from 'next/navigation';
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug: rawSlug } = await params;
   const slug = decodeURIComponent(rawSlug);

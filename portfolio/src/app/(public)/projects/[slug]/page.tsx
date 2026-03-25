@@ -4,6 +4,8 @@ import Project, { IProject } from '@/models/Project';
 import ProjectDetailsClient from '@/components/public/ProjectDetailsClient';
 import { notFound } from 'next/navigation';
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   await dbConnect();

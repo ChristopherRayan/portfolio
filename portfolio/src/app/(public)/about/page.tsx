@@ -7,6 +7,8 @@ export const metadata = {
   description: 'Learn more about my background, experience, and journey.',
 };
 
+export const dynamic = 'force-dynamic';
+
 export default async function AboutPage() {
   await dbConnect();
   const profile = await Profile.findOne({}).lean();
