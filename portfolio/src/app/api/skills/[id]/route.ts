@@ -7,7 +7,7 @@ import { logAudit } from '@/lib/audit';
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<Record<string, string>> }
 ) {
   const session = await auth();
   if (!session || !session.user) {
@@ -44,7 +44,7 @@ export async function PUT(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<Record<string, string>> }
 ) {
   const session = await auth();
   if (!session || !session.user) {

@@ -4,7 +4,7 @@ import Blog from '@/models/Blog';
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: Promise<{ slug: string }> }
+  { params }: { params: Promise<Record<string, string>> }
 ) {
   try {
     const { slug: rawSlug } = await params;

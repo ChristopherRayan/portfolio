@@ -8,7 +8,7 @@ import { logAudit } from '@/lib/audit';
 // GET /api/services/[id] - Get single service
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<Record<string, string>> }
 ) {
   try {
     const { id } = await params;
@@ -35,7 +35,7 @@ export async function GET(
 // PUT /api/services/[id] - Update service (admin only)
 export async function PUT(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<Record<string, string>> }
 ) {
   try {
     const { id } = await params;
@@ -88,7 +88,7 @@ export async function PUT(
 // DELETE /api/services/[id] - Delete service (admin only)
 export async function DELETE(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<Record<string, string>> }
 ) {
   try {
     const { id } = await params;
