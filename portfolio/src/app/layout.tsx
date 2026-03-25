@@ -1,12 +1,9 @@
 import type { Metadata } from 'next';
-import { Inter, Outfit } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/providers';
 import { Toaster } from '@/components/ui/sonner';
 import { AnalyticsTracker } from '@/components/public/AnalyticsTracker';
 import { Suspense } from 'react';
-
-const outfit = Outfit({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: {
@@ -48,7 +45,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={outfit.className}>
+      <body>
         <Providers>
           {children}
           <Suspense fallback={null}>

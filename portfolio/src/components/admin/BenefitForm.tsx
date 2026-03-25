@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -33,7 +34,7 @@ interface BenefitFormProps {
 }
 
 export function BenefitForm({ initialData, onSubmit, isLoading, onCancel }: BenefitFormProps) {
-  const form = useForm<z.infer<typeof benefitSchema>>({
+  const form = useForm<any>({
     resolver: zodResolver(benefitSchema),
     defaultValues: initialData || {
       icon: 'Zap',
@@ -160,5 +161,3 @@ export function BenefitForm({ initialData, onSubmit, isLoading, onCancel }: Bene
     </Form>
   );
 }
-
-import React from 'react';

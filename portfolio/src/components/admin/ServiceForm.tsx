@@ -36,7 +36,7 @@ interface ServiceFormProps {
 }
 
 export function ServiceForm({ initialData, onSubmit, isLoading, onCancel }: ServiceFormProps) {
-  const form = useForm<z.infer<typeof serviceSchema>>({
+  const form = useForm<any>({
     resolver: zodResolver(serviceSchema),
     defaultValues: initialData ? {
       title: initialData.title,

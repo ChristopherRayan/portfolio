@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -25,7 +26,7 @@ interface ProcessFormProps {
 }
 
 export function ProcessForm({ initialData, onSubmit, isLoading, onCancel }: ProcessFormProps) {
-  const form = useForm<z.infer<typeof processSchema>>({
+  const form = useForm<any>({
     resolver: zodResolver(processSchema),
     defaultValues: initialData || {
       step: '',
