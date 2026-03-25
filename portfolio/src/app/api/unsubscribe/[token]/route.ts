@@ -3,10 +3,10 @@ import dbConnect from '@/lib/db';
 import Subscriber from '@/models/Subscriber';
 
 /**
- * Unsubscribe a user using their unique secure token
+ * Unsubscribe a user using their unique secure token.
  */
 export async function GET(
-  req: NextRequest,
+  _req: NextRequest,
   { params }: { params: Promise<{ token: string }> }
 ) {
   const { token } = await params;
@@ -21,20 +21,31 @@ export async function GET(
     const subscriber = await Subscriber.findOne({ unsubToken: token });
 
     if (!subscriber) {
-      return NextResponse.json({ error: 'Invalid or expired unsubscription link' }, { status: 404 });
+      return NextResponse.json(
+        { error: 'Invalid or expired unsubscription link' },
+        { status: 404 }
+      );
     }
 
     if (!subscriber.isActive) {
-       return NextResponse.json({ message: 'You have already unsubscribed.' }, { status: 200 });
+      return NextResponse.json(
+        { message: 'You have already unsubscribed.' },
+        { status: 200 }
+      );
     }
 
-    // Deactivate the subscriber
     subscriber.isActive = false;
     await subscriber.save();
 
-    return NextResponse.json({ message: 'Successfully unsubscribed from CRK Portfolio updates.' }, { status: 200 });
+    return NextResponse.json(
+      { message: 'Successfully unsubscribed from CRK Portfolio updates.' },
+      { status: 200 }
+    );
   } catch (error) {
     console.error('Unsubscribe error:', error);
-    return NextResponse.json({ error: 'Failed to process unsubscription' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Failed to process unsubscription' },
+      { status: 500 }
+    );
   }
 }
